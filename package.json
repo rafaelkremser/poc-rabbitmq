@@ -1,0 +1,25 @@
+{
+    "name": "poc-rabbitmq",
+    "version": "1.0.0",
+    "description": "A POC for study RabbitMQ",
+    "main": "index.js",
+    "scripts": {
+        
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rafaelkremser/poc-rabbitmq.git"
+    },
+    "author": "Rafael Kremser",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/rafaelkremser/poc-rabbitmq/issues"
+    },
+    "homepage": "https://github.com/rafaelkremser/poc-rabbitmq#readme",
+    "dependencies": {
+        "amqplib": "^0.10.4"
+    },
+    "devDependencies": {
+        "@types/amqplib": "^0.10.5"
+    }
+}
