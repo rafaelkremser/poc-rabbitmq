@@ -1,4 +1,4 @@
-import amqp from 'amqplib';
+import amqp from "amqplib";
 
 async function main() {
     const connection = await amqp.connect({
@@ -7,19 +7,17 @@ async function main() {
         username: 'rabbitmq',
         password: 'rabbitmq'
     });
-
+  
     const channel = await connection.createChannel();
-    const channel2 = await connection.createChannel();
+  
+    await channel.assertQueue('minha_fila', { durable: true });
+  
+    let i=1;
 
-    await channel.assertQueue('minha_fila', {
-        durable: true,
-    });
-
-    let i=1
     for(let i=0; i<1000;i++){
         channel.publish('', 'minha_fila', Buffer.from(`Minha mensagem ${i}`))
-    }
-
+    };
+    
     await channel.close();
     await connection.close();
 }

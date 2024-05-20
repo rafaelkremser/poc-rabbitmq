@@ -14,12 +14,15 @@ async function main() {
         durable: true
     })
 
-    channel.consume("minha_fila", (data) => {
+    channel.prefetch(5);
+
+    channel.consume('minha_fila', (data) => {
         console.log(data.content.toString())
+
         setTimeout(() => {
           channel.ack(data)
         }, 5000)
-      });
+    });
 }
 
 main();
