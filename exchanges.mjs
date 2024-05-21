@@ -12,13 +12,19 @@ async function exchange() {
 
     await channel.assertExchange('exchange', 'direct');
 
-    await channel.assertQueue('fila_notification', {
-        durable: true
+    await channel.assertQueue('push_notification', {
+        durable: true,
     });
 
-    channel.bindQueue('fila_notification', 'exchange', 'novaMensagem');
+    await channel.assertQueue('email_notification', {
+        durable: true,
+    });
 
-    channel.publish('exchange', 'novaMensagem', Buffer.from('Teste'));
+    await channel.bindQueue('push_notification', 'exchange', 'novoCurso');
+    await channel.bindQueue('email_notification', 'exchange', 'send.#');
+    await channel.bindQueue('email_notification', 'exchange', 'diploma');
+
+    channel.publish('exchange', 'diploma', Buffer.from("Teste mensagem"));
 
     await channel.close();
     await conn.close();
